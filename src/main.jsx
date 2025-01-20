@@ -9,6 +9,8 @@ import { lazy, Suspense } from 'react'
 const About = lazy(() => import('./Components/About.jsx'))
 const Error = lazy(() => import('./Components/Error.jsx'));
 const Cart = lazy(() => import('./Components/Cart.jsx'));
+const ProductDetail = lazy(() => import('./Components/ProductDetail.jsx'));
+
 const aptRouter = createBrowserRouter(
   [
     {
@@ -41,6 +43,14 @@ const aptRouter = createBrowserRouter(
           element: (
             <Suspense fallback={<div>Loading...</div>}>
               <Cart/>
+            </Suspense>
+          )
+        },
+        {
+          path: '/product-detail/:id',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <ProductDetail/>
             </Suspense>
           )
         }
