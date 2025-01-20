@@ -1,11 +1,16 @@
+import { Outlet } from 'react-router-dom'
 import './App.css'
+import Footer from './Components/Footer'
+import Header from './Components/Header'
 
 function App() {
 
   return (
     <>
-      <div className='container mx-auto my-10'>
-        <h1 className='font-playwrite-in  text-6xl font-bold text-green-500'>Hello world</h1>
+      <div className='container mx-auto'>
+        <Header/>
+        <Outlet/>
+        <Footer/>
       </div>
     </>
   )
