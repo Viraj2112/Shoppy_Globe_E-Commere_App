@@ -5,43 +5,48 @@ import { addItem } from "../utils/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function ProductDetail() {
-    const [items, setItems] =  useState(1); //This is the options useState
+    const [items, setItems] =  useState(1); //This is the Select Options useState
+    // getting hold of the url params
     const params = useParams();
+    // Below again we are getting hold of all the products from the  fetched data
     const { data, error, loading } = useFetch('https://dummyjson.com/products');
-    const products = !loading ? data.products : [];
+    const products = !loading ? data.products : []; //getting hold of the data.products if loading = false
+    // below here, getting hold of the product which user has asked details for
     const product = !loading ? products.find(product => product.id == params.id) : []; //this is the product from the fetchData
-    const allItems = useSelector(state => state.cart.items);
+    const allItems = useSelector(state => state.cart.items);    // getting hold of all the Items in the Redux App store
     const item = allItems.find(item => item.id === product?.id); //This is the item from the cart
     const dispatch = useDispatch();
+    // Below optionArray is created for the Quantity of Items in Select Option.
     const optionArray = [1,2,3,4,5,6,7,8,9,10];
 
+    // Once the Item is fetched if there is quantity of the item then set the Select Options items to that quantity
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll the page to the top when the page is loaded
         (item?.quantity) && setItems(item.quantity);
     }, [item]);
     
-
+    // When the option is changed then setItems to that changed value
     function handleChange(value) {
         setItems(value)
     }
 
+    // Function to Add the Item into the cart.
     function addToCart() {
         dispatch(addItem({ ...product, quantity: items }));
         alert("Item Added to Cart");
     }
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    },[])
-
     return (
         <>
             {product.length!=0 ? (
+                // Product Details Page
                 <div className="border-2 p-4 flex flex-col md:flex-row gap-6 shadow-lg rounded-md">
                     {/* Product Image Section */}
                     <div className="w-full h-full md:w-1/2 flex flex-col justify-between">
                         <div className="px-5 h-10 md:h-24 flex items-center">
                             {/* Wrapping the Link directly around the image */}
                             <Link to="/" className="inline-block">
+                                {/* Back Button */}
                                 <img 
                                     className="object-contain h-8 w-8 md:h-12 md:w-12" 
                                     src="/back-button.jpg" 
@@ -49,6 +54,7 @@ function ProductDetail() {
                                 />
                             </Link>
                         </div>
+                        {/* Product Image */}
                         <img
                             className="max-w-full max-h-96 object-contain rounded-lg shadow-lg"
                             src={product.images[0]}
@@ -131,6 +137,7 @@ function ProductDetail() {
             </div>
             
             ) : (
+                // Loading page
                 <div className="h-screen flex justify-center my-32 text-3xl font-bold">Loading...</div>
             )}
         </>

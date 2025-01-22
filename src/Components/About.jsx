@@ -1,6 +1,7 @@
 function About() {
     return (
-        <>
+        <>  
+            {/* About Section contains General Info about the App */}
             <div className="p-5 text-justify">
                 <h1 className="text-xl font-semibold md:font-bold md:text-3xl md:my-5">About ShoppyGlobe</h1>
                 <p className="md:text-lg ">Welcome to <span className="font-semibold">ShoppyGlobe</span>, your ultimate shopping destination! This simple yet powerful e-commerce application provides a seamless shopping experience for users, offering a wide variety of products to explore and purchase.</p>

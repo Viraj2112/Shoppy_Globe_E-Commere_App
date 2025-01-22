@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 
+// Below here is the Custom Hook to Fetch Data from the url
 function useFetch(url) {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);

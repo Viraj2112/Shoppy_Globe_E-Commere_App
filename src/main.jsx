@@ -6,11 +6,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProductList from './Components/ProductList.jsx'
 import { lazy, Suspense } from 'react'
 
+// using lazy and Suspense to get hold of the Components
+const Checkout = lazy(() => import('./Components/Checkout.jsx'))
 const About = lazy(() => import('./Components/About.jsx'))
 const Error = lazy(() => import('./Components/Error.jsx'));
 const Cart = lazy(() => import('./Components/Cart.jsx'));
 const ProductDetail = lazy(() => import('./Components/ProductDetail.jsx'));
 
+// Creating a BrowserRouter for Routing
 const aptRouter = createBrowserRouter(
   [
     {
@@ -24,11 +27,7 @@ const aptRouter = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <ProductList/>
-            </Suspense>
-          )
+          element: <ProductList/>
         },
         {
           path: '/about',
@@ -53,6 +52,14 @@ const aptRouter = createBrowserRouter(
               <ProductDetail/>
             </Suspense>
           )
+        },
+        {
+          path: '/checkout',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Checkout/>
+            </Suspense>
+          )
         }
       ]
     }
@@ -61,6 +68,6 @@ const aptRouter = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={aptRouter} />
+    <RouterProvider router={aptRouter} /> {/* Here providing the aptRouter created to the Router Provider */}
   </StrictMode>,
 )
