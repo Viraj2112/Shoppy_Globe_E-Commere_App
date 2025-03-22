@@ -58,7 +58,7 @@ Follow these steps to run ShoppyGlobe locally:
 
 ## Screenshots
 
-![Homepage](/vite-project/public/Homepage.png)
+![Homepage](./public/Homepage.png)
 
 ![Product Details](./public/ProductDetail.png)
 
